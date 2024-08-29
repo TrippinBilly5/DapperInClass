@@ -9,5 +9,6 @@ namespace DapperInClass
     internal interface IDepartmentRepository
     {
         public IEnumerable<Department> GetAllDepartments();
+        public void InsertDepartment(string dept);
     }
 }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace DapperInClass
 {
-    internal class DepartmentRepository : IDepartmentRepository
+    internal class DapperDepartmentRepository : IDepartmentRepository
     {
         private readonly IDbConnection _connection; //field
         
         //Constructor
-        public DepartmentRepository(IDbConnection connection)
+        public DapperDepartmentRepository(IDbConnection connection)
         {
             _connection = connection;
         }
@@ -21,6 +21,12 @@ namespace DapperInClass
         public IEnumerable<Department> GetAllDepartments()
         {
             return _connection.Query<Department>("SELECT * FROM Departments;");
+        }
+
+        public void InsertDepartment(string newDepartmentName)
+        {
+            _connection.Execute("INSERT INTO DEPARTMENTS (Name) VALUES (@departmentName);", 
+                new { departmentName = newDepartmentName });
         }
     }
 }
