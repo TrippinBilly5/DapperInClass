@@ -15,6 +15,22 @@ string connString = config.GetConnectionString("DefaultConnection");
 #endregion
 
 IDbConnection conn = new MySqlConnection(connString);
+
+#region Excercise2
+var repo2 = new DapperProductRepository(conn);
+var products = repo2.GetAllProducts();
+repo2.CreateProduct("newProdzz", 20, 1);
+Console.WriteLine("Hello user, here are the current products:");
+Console.WriteLine("Please press Enter ...");
+Console.ReadLine();
+foreach (var product in products)
+{
+    Console.WriteLine($"{product.ProductID} {product.Name}");
+}
+
+#endregion
+
+#region Excercise1
 var repo = new DapperDepartmentRepository(conn);
 
 Console.WriteLine("Hello user, here are the current departments:");
@@ -27,7 +43,7 @@ Print(departments);
 Console.WriteLine("Do you want to add a department?");
 string userResponse = Console.ReadLine();
 
-if(userResponse.ToLower() == "yes")
+if (userResponse.ToLower() == "yes")
 {
     Console.WriteLine("What is the name of your new department?");
     userResponse = Console.ReadLine();
@@ -45,3 +61,4 @@ static void Print(IEnumerable<Department> departments)
         Console.WriteLine($"Id: {dept.DepartmentId} Name: {dept.Name}");
     }
 }
+#endregion
